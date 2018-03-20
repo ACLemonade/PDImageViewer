@@ -1,5 +1,5 @@
 //
-//  ColorConst.swift
+//  APIStringConst.swift
 //  PDImageViewer
 //
 //  Created by Lemonade on 2018/3/12.
@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+class APIStringConst: NSObject {
+    
+}
+  
