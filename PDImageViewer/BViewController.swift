@@ -10,6 +10,8 @@ import UIKit
 
 class BViewController: UIViewController {
     
+    let kDefaultImageViewTag = 20000
+    
     var myTableView: UITableView?
     
     lazy var imageViewer: ImageViewer = {
@@ -80,9 +82,12 @@ class BViewController: UIViewController {
     }
     @objc func showImageViewer(sender: UIGestureRecognizer) {
         let imgView = sender.view as! UIImageView
-        imageViewer.contentImages = [imgView.image!]
+        imageViewer.contentImages = imageArr
         let frame = UIView.getCorrectFrameFromOriginView(originView: imgView)
         imageViewer.originFrame = frame
+        if (imgView.tag - kDefaultImageViewTag) >= 0 {
+            imageViewer.selectedIndex = imgView.tag - kDefaultImageViewTag
+        }
         imageViewer.show()
     }
 }
@@ -104,8 +109,10 @@ extension BViewController: UITableViewDataSource {
                 cellA = UITableViewCell.init(style: .default, reuseIdentifier: BViewController.cellIdentifyA)
                 cellA?.imageView?.contentMode = .scaleAspectFit
                 cellA?.imageView?.isUserInteractionEnabled = true
-                cellA?.imageView?.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showImageViewer(sender:))))
+                
+            cellA?.imageView?.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showImageViewer(sender:))))
             }
+            cellA?.imageView?.tag = kDefaultImageViewTag + indexPath.row
             cellA?.imageView?.image = imageArr[row].scaleImage(scaleSize: 0.5)
             return cellA!
         } else {
@@ -116,6 +123,7 @@ extension BViewController: UITableViewDataSource {
                 cellB?.imageView?.contentMode = .scaleAspectFit
                 cellB?.imageView?.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(showImageViewer(sender:))))
             }
+            cellB?.imageView?.tag = kDefaultImageViewTag + indexPath.row
             cellB?.imageView?.image = imageArr[row].scaleImage(scaleSize: 0.5)
             return cellB!
         }

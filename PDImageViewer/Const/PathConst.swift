@@ -18,13 +18,13 @@ class PathConst: NSObject {
     /// Cache路径
     static let cache = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
     /// 用户信息plist路径
-    static let userDataPlist: String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first! + "/UserData.plist"
+    static let userDataPlist = PathConst.document! + "/UserData.plist"
     /// 缓存主目录
-    static let fileCachesDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first! + "/file/download/"
+    static let fileCachesDirectory = PathConst.cache! + "/file/download/"
     /// plist文件存储目录
-    static let magzine = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first! + "/file/plist"
+    static let magzine = PathConst.cache! + "/file/plist"
     /// 小视频存储目录
-    static let video = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first! + "/file/video"
+    static let video = PathConst.cache! + "/file/video"
 }
 
 

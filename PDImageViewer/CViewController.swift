@@ -10,6 +10,8 @@ import UIKit
 
 class CViewController: UIViewController {
     
+    let kDefaultImageViewTag = 30000
+    
     lazy var imageViewer: ImageViewer = {
         let imgViewer = ImageViewer.init()
         return imgViewer
@@ -71,9 +73,12 @@ class CViewController: UIViewController {
     
     @objc func showImageViewer(sender: UIGestureRecognizer) {
         let imgView = sender.view as! UIImageView
-        imageViewer.contentImages = [imgView.image!]
+        imageViewer.contentImages = imageArr
         let frame = UIView.getCorrectFrameFromOriginView(originView: imgView)
         imageViewer.originFrame = frame
+        if (imgView.tag - kDefaultImageViewTag) >= 0 {
+            imageViewer.selectedIndex = imgView.tag - kDefaultImageViewTag
+        }
         imageViewer.show()
     }
 }
